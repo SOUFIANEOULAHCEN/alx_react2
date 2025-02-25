@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* p {
+    color: #0e1f4c;
+} */
+
+/* Personnalisation de SweetAlert */
+.custom-swal-popup {
+    background-color: #0A1F44; /* primary */
+    border-radius: 8px; /* optionnel pour arrondir les coins */
+  }
+  
+  .custom-swal-title {
+    color: #FFFFFF; /* white */
+  }
+  
+  .custom-swal-button {
+    background-color: #0e1f4c; /* secondary */
+    color: white; /* white */
+    border-radius: 8px; /* pour arrondir les coins du bouton */
+  }
+  
+  .custom-swal-button:hover {
+    background-color: #0A1F44; /* primary pour le hover */
+  }
+  
