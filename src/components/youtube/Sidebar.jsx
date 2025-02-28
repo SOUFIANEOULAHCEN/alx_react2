@@ -5,6 +5,7 @@ import { MdSubscriptions } from "react-icons/md";
 import { IoDownloadSharp } from "react-icons/io5";
 import { useSelector, useDispatch } from "react-redux";
 import { SelectPlaylist } from "./reducers/PlaylistActions";
+import { Link } from "react-router-dom";
 
 export default function Sidebar({ isVisible, isCollapsed, closeSidebar }) {
   const dispatch = useDispatch();
@@ -22,9 +23,12 @@ export default function Sidebar({ isVisible, isCollapsed, closeSidebar }) {
     >
       {/* Liste des éléments */}
       <ul className="space-y-4">
-        <li className="cursor-pointer flex items-center gap-4 px-4 py-2 rounded-md hover:bg-blue-900">
-          <FaHome className="text-xl text-white" />
-          {!isCollapsed && <span>Home</span>}
+        <li className="cursor-pointer flex items-center gap-4  rounded-md hover:bg-blue-900">
+          <Link to={"/"}  className="cursor-pointer flex items-center gap-4 px-4 py-2 rounded-md hover:bg-blue-900">
+            {" "}
+            <FaHome className="text-xl text-white" />
+            {!isCollapsed && <span>Home</span>}
+          </Link>
         </li>
         <li className="cursor-pointer flex items-center gap-4 px-4 py-2 rounded-md hover:bg-blue-900">
           <SiYoutubeshorts className="text-xl text-white" />

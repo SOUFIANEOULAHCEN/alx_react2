@@ -4,6 +4,8 @@ export const SELECTED_VIDEO = "SELECTED_VIDEO";
 export const likes_VIDEO = "likes_VIDEO";
 export const dislikes_VIDEO = "dislikes_VIDEO";
 export const ADD_COMMENT = "ADD_COMMENT";
+export const DELETE_COMMENT = "DELETE_COMMENT";
+
 
 export const SelectVideo = (idVideo) => ({
   type: SELECTED_VIDEO,
@@ -36,4 +38,11 @@ export const DislikeVideo = (idVideo) => ({
 export const AddComment = (idVideo, comment) => ({
   type: ADD_COMMENT,
   payload: { idVideo, comment },
+});
+
+
+
+export const DeleteComment = (idVideo, commentIndex) => ({
+  type: DELETE_COMMENT,
+  payload: { idVideo, commentIndex },
 });

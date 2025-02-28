@@ -1,21 +1,24 @@
 import React, { useState } from "react";
+import profil from "../../assets/img/profil.png";
 import { FaBars } from "react-icons/fa6";
 import { FaSearch, FaMicrophone } from "react-icons/fa";
 import { MdNotificationsNone, MdExitToApp } from "react-icons/md"; // Icône pour "Logout"
+import { IoLogIn } from "react-icons/io5";
+import { IoSettings } from "react-icons/io5";
 
 import logo from "../../assets/img/logo.png";
 import profile_image from "../../assets/img/profile_image.png";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-export default function Header({ toggleSidebar }) {
+export default function HeaderHome({ toggleSidebar }) {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
-const navigate = useNavigate();
+  const navigate = useNavigate();
   const toggleProfilePopup = () => {
     setIsProfileOpen(!isProfileOpen);
   };
 
   const handleLogout = () => {
-    navigate('/')
+    navigate("/");
     console.log("Déconnexion");
   };
 
@@ -23,7 +26,10 @@ const navigate = useNavigate();
     <div className="w-full bg-primary/70 backdrop-blur-lg text-white flex justify-between items-center px-4 py-2 shadow-md z-20 fixed top-0 left-0 right-0">
       {/* Partie logo */}
       <div className="flex items-center gap-10">
-        <FaBars className="text-xl cursor-pointer ml-3" onClick={toggleSidebar} />
+        <FaBars
+          className="text-xl cursor-pointer ml-3"
+          onClick={toggleSidebar}
+        />
         <div className="flex items-center gap-2">
           <img className="w-10 h-auto shadow-lg" src={logo} alt="logo" />
           <p className="text-xl font-semibold text-white">IToub</p>
@@ -48,7 +54,7 @@ const navigate = useNavigate();
           onClick={toggleProfilePopup}
         >
           <img
-            src={profile_image}
+            src={profil}
             alt="profile"
             className="w-8 h-8 rounded-full bg-lightGray"
           />
@@ -56,27 +62,36 @@ const navigate = useNavigate();
 
         {isProfileOpen && (
           <div className="absolute top-14 right-4 bg-primary text-white rounded-lg shadow-lg w-64 p-4">
-            <h3 className="text-lg font-semibold">Your Profile</h3>
-            <div className="mt-2 flex items-center gap-2">
-              <img
-                src={profile_image}
+            {/* <h3 className="text-lg font-semibold">Your Profile</h3> */}
+            {/* <div className="mt-2 flex items-center gap-2"> */}
+              {/* <img
+                src={profil}
                 alt="profile"
-                className="w-10 h-10 rounded-full"
-              />
-              <div>
+                className="w-10 h-10 rounded-full border border-lightGray"
+              /> */}
+              {/* <div>
                 <p className="text-sm font-semibold">Soufiane</p>
-                <p className="text-xs text-gray-400">Web Developer</p>
-              </div>
-            </div>
+                <p className="text-xs text-gray-400">Web Developer</p> 
+              </div> */}
+            {/* </div> */}
             <ul className="mt-4 space-y-2">
-              <li className="cursor-pointer hover:bg-lightGray p-2 rounded-md">View Profile</li>
-              <li className="cursor-pointer hover:bg-lightGray p-2 rounded-md">Settings</li>
-              <li
+              <li className="w-full cursor-pointer hover:bg-lightGray p-2 rounded-md">
+                <Link
+                  to={"/login"}
+                  className="cursor-pointer flex items-center gap-3 hover:bg-lightGray rounded-md"
+                >
+                  <IoLogIn className="text-xl" /> Login
+                </Link>
+              </li>
+              <li className="cursor-pointer flex items-center gap-3 hover:bg-lightGray p-2 rounded-md">
+              <IoSettings className="text-lg" />  Settings
+              </li>
+              {/* <li
                 className="cursor-pointer hover:bg-lightGray p-2 rounded-md flex items-center gap-2"
                 onClick={handleLogout}
               >
                 <MdExitToApp className="text-sm" /> Logout
-              </li>
+              </li> */}
             </ul>
           </div>
         )}

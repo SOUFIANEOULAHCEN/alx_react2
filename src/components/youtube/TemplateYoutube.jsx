@@ -11,7 +11,8 @@ export default function TemplateYoutube() {
 
   const toggleSidebar = () => {
     if (!isSidebarVisible) {
-      setIsSidebarVisible(true);
+      setIsSidebarVisible(!isSidebarVisible);
+
     } else {
       setIsSidebarCollapsed(!isSidebarCollapsed);
     }

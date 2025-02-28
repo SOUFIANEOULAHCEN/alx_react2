@@ -4,6 +4,7 @@ import {
   ADD_COMMENT,
   likes_VIDEO,
   dislikes_VIDEO,
+  DELETE_COMMENT
 } from "./PlaylistActions";
 // import man from "../img/man.jpeg";
 const etatInitial = {
@@ -27,6 +28,8 @@ const etatInitial = {
           ],
           likes: 150,
           dislikes: 5,
+          isLiked: false,
+          isDisliked: false,
           lien: "https://www.youtube.com/watch?v=01ysRUHZbJI&list=PLoMFrq1Jfnr82k8rSczHHvaf7Y_lSPbaW&index=7",
           auteur: {
             nom: "Dupont",
@@ -50,6 +53,8 @@ const etatInitial = {
           ],
           likes: 200,
           dislikes: 10,
+          isLiked: false,
+          isDisliked: false,
           lien: "https://www.youtube.com/watch?v=mMmiZTgOW2Q&list=PLoMFrq1Jfnr82k8rSczHHvaf7Y_lSPbaW",
           auteur: {
             nom: "GAHI",
@@ -78,6 +83,8 @@ const etatInitial = {
           ],
           likes: 250,
           dislikes: 8,
+          isLiked: false,
+          isDisliked: false,
           lien: "https://www.youtube.com/watch?v=GCYYkOSKj80&list=PLuXY3ddo_8nzCVqXcTFqwcM5R0gZiMRiW",
           auteur: {
             nom: "Martin",
@@ -99,6 +106,8 @@ const etatInitial = {
           ],
           likes: 180,
           dislikes: 3,
+          isLiked: false,
+          isDisliked: false,
           lien: "https://www.youtube.com/watch?v=xNm6y8SYcs4&list=PLuXY3ddo_8nzCVqXcTFqwcM5R0gZiMRiW&index=2",
           auteur: {
             nom: "Dupont",
@@ -126,6 +135,8 @@ const etatInitial = {
           ],
           likes: 300,
           dislikes: 5,
+          isLiked: false,
+          isDisliked: false,
           lien: "https://www.youtube.com/watch?v=6oKYY8H9LtE&list=PLKV6WevXj-lV2tqD_3ljxspt4qAFGK-M1",
           auteur: {
             nom: "Leclerc",
@@ -147,6 +158,8 @@ const etatInitial = {
           ],
           likes: 220,
           dislikes: 7,
+          isLiked: false,
+          isDisliked: false,
           lien: "https://www.youtube.com/watch?v=NEsOcYlbqr8&list=PLKV6WevXj-lV2tqD_3ljxspt4qAFGK-M1&index=2",
           auteur: {
             nom: "Lemoine",
@@ -174,6 +187,8 @@ const etatInitial = {
           ],
           likes: 350,
           dislikes: 4,
+          isLiked: false,
+          isDisliked: false,
           lien: "https://www.youtube.com/watch?v=mMmiZTgOW2Q&list=PLoMFrq1Jfnr82k8rSczHHvaf7Y_lSPbaW",
           auteur: {
             nom: "Benoit",
@@ -195,6 +210,8 @@ const etatInitial = {
           ],
           likes: 280,
           dislikes: 10,
+          isLiked: false,
+          isDisliked: false,
           lien: "https://www.youtube.com/watch?v=K9a1fGQilwI&list=PLoMFrq1Jfnr82k8rSczHHvaf7Y_lSPbaW&index=2",
           auteur: {
             nom: "Lemoine",
@@ -222,6 +239,8 @@ const etatInitial = {
           ],
           likes: 150,
           dislikes: 5,
+          isLiked: false,
+          isDisliked: false,
           lien: "https://www.youtube.com/watch?v=K9a1fGQilwI&list=PLoMFrq1Jfnr82k8rSczHHvaf7Y_lSPbaW&index=2",
           auteur: {
             nom: "Durand",
@@ -243,6 +262,8 @@ const etatInitial = {
           ],
           likes: 180,
           dislikes: 8,
+          isLiked: false,
+          isDisliked: false,
           lien: "https://www.youtube.com/watch?v=K9a1fGQilwI&list=PLoMFrq1Jfnr82k8rSczHHvaf7Y_lSPbaW&index=2",
           auteur: {
             nom: "Sauvage",
@@ -299,6 +320,32 @@ const PlaylistReducer = (state = etatInitial, action) => {
     //     })),
     //   };
 
+    // case likes_VIDEO:
+    //   return {
+    //     ...state,
+    //     playlists: state.playlists.map((plst) => ({
+    //       ...plst,
+    //       videos: plst.videos.map((video) =>
+    //         video.id === action.payload
+    //           ? { ...video, likes: video.likes + 1 }
+    //           : video
+    //       ),
+    //     })),
+    //   };
+
+    // case dislikes_VIDEO:
+    //   return {
+    //     ...state,
+    //     playlists: state.playlists.map((plst) => ({
+    //       ...plst,
+    //       videos: plst.videos.map((video) =>
+    //         video.id === action.payload
+    //           ? { ...video, dislikes: video.dislikes + 1 }
+    //           : video
+    //       ),
+    //     })),
+    //   };
+
     case likes_VIDEO:
       return {
         ...state,
@@ -306,7 +353,15 @@ const PlaylistReducer = (state = etatInitial, action) => {
           ...plst,
           videos: plst.videos.map((video) =>
             video.id === action.payload
-              ? { ...video, likes: video.likes + 1 }
+              ? {
+                  ...video,
+                  likes: video.isLiked ? video.likes - 1 : video.likes + 1,
+                  dislikes: video.isDisliked
+                    ? video.dislikes - 1
+                    : video.dislikes,
+                  isLiked: !video.isLiked,
+                  isDisliked: false,
+                }
               : video
           ),
         })),
@@ -319,7 +374,15 @@ const PlaylistReducer = (state = etatInitial, action) => {
           ...plst,
           videos: plst.videos.map((video) =>
             video.id === action.payload
-              ? { ...video, dislikes: video.dislikes + 1 }
+              ? {
+                  ...video,
+                  dislikes: video.isDisliked
+                    ? video.dislikes - 1
+                    : video.dislikes + 1,
+                  likes: video.isLiked ? video.likes - 1 : video.likes,
+                  isDisliked: !video.isDisliked,
+                  isLiked: false,
+                }
               : video
           ),
         })),
@@ -333,12 +396,31 @@ const PlaylistReducer = (state = etatInitial, action) => {
             video.id === action.payload.idVideo
               ? {
                   ...video,
-                  commentaires: [...video.commentaires, action.payload.comment],
+                  // commentaires: [...video.commentaires, action.payload.comment],
+                  commentaires: [action.payload.comment, ...video.commentaires],
                 }
               : video
           ),
         })),
       };
+    case DELETE_COMMENT:
+      return {
+        ...state,
+        playlists: state.playlists.map((plst) => ({
+          ...plst,
+          videos: plst.videos.map((video) =>
+            video.id === action.payload.idVideo
+              ? {
+                  ...video,
+                  commentaires: video.commentaires.filter(
+                    (_, index) => index !== action.payload.commentIndex
+                  ),
+                }
+              : video
+          ),
+        })),
+      };
+
     default:
       return state;
   }
