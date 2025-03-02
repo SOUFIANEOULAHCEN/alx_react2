@@ -26,7 +26,7 @@ const navigate = useNavigate();
         <FaBars className="text-xl cursor-pointer ml-3" onClick={toggleSidebar} />
         <div className="flex items-center gap-2">
           <img className="w-10 h-auto shadow-lg" src={logo} alt="logo" />
-          <p className="text-xl font-semibold text-white">IToub</p>
+          <p className="text-xl font-semibold text-white">IToube</p>
         </div>
       </div>
 

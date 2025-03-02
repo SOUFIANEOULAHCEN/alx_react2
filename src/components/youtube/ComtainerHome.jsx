@@ -42,7 +42,7 @@ export default function ContainerHome({ isSidebarCollapsed }) {
           onClick={() => handlePlaylistSelect(null)}
           className={`px-4 py-2 rounded-lg ${
             selectedPlaylist === null
-              ? "bg-blue-500 text-white"
+              ? "bg-blue-800 text-white"
               : "bg-white/10 text-gray-400"
           }`}
         >
@@ -54,7 +54,7 @@ export default function ContainerHome({ isSidebarCollapsed }) {
             onClick={() => handlePlaylistSelect(playlist.id)}
             className={`px-4 py-2 rounded-lg ${
               selectedPlaylist === playlist.id
-                ? "bg-blue-500 text-white"
+                ? "bg-blue-800 text-white"
                 : "bg-white/10 text-gray-400"
             }`}
           >
